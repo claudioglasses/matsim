@@ -23,6 +23,9 @@ import playground.sebhoerl.plcpc.ParallelLeastCostPathCalculator;
 
 import java.util.*;
 
+// if more available AVs than customers: new customer request is assigned to closest AV.
+// if more waiting customers than AVs: newest avaialble AV will be assigned to closest waiting customer.
+
 public class SingleHeuristicDispatcher implements AVDispatcher {
     private boolean reoptimize = true;
 

@@ -26,6 +26,8 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
+// FIFO: First vehicle entering the idle-vehicles-queue will pick up the next customer avaialble no matter where he is.
+
 public class SingleFIFODispatcher implements AVDispatcher {
     final private SingleRideAppender appender;
     final private Queue<AVVehicle> availableVehicles = new LinkedList<>();
@@ -40,12 +42,14 @@ public class SingleFIFODispatcher implements AVDispatcher {
         this.eventsManager = eventsManager;
     }
 
+    // adds a new request to pending request queue
     @Override
     public void onRequestSubmitted(AVRequest request) {
         pendingRequests.add(request);
         reoptimize = true;
     }
 
+    // check if AV starts stay task (idle), if yes add to available vehicles
     @Override
     public void onNextTaskStarted(AVTask task) {
         if (task.getAVTaskType() == AVTask.AVTaskType.STAY) {
